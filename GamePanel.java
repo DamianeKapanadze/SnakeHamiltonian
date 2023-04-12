@@ -9,7 +9,7 @@ public class GamePanel extends JPanel implements ActionListener{
     static final int Screen_Height = 600;
     static final int Unit_Size = 25;
     static final int Game_Untis = Screen_Width*Screen_Height/Unit_Size;
-    static final int Delay = 50;
+    static final int Delay = 5;
     final int x[] = new int[Game_Untis];
     final int y[] = new int[Game_Untis];
     int[][]  path = hamiltonianCycle(Screen_Width/Unit_Size, Screen_Height/Unit_Size);
@@ -150,8 +150,8 @@ public class GamePanel extends JPanel implements ActionListener{
     
     public void moveAI(){
         
-        int SnekX = x[0]/Unit_Size +1;
-        int SnekY = y[0]/Unit_Size + 1;
+        //int SnekX = x[0]/Unit_Size + 1;
+        //int SnekY = y[0]/Unit_Size + 1;
         
         //Debugging
 /*
@@ -170,7 +170,6 @@ public class GamePanel extends JPanel implements ActionListener{
 */
         //System.out.println(path[y[0]/Unit_Size][x[0]/Unit_Size] + " " + path[y[0]/Unit_Size][x[0]/Unit_Size+1]);
 
-        // mokled aq sadgac gadis out of bopunds, if-ebia gasasworebeli
         
         
         
@@ -178,7 +177,7 @@ public class GamePanel extends JPanel implements ActionListener{
         //System.out.println(path[y[0]/Unit_Size][x[0]/Unit_Size] + 1 +"    " + path[y[0]/Unit_Size][x[0]/Unit_Size + 1]);
         
         // miyevi hamiltoninan path-s
-
+/*      ///////////////// mokled es moshaobs cudad \\\\\\\\\\\\\\\\\\\\\\\\\
         if (path[SnekY][SnekX] + 1 == path[SnekY - 1][SnekX] && direction != 'd'){
             direction = 'u';
         }
@@ -194,26 +193,30 @@ public class GamePanel extends JPanel implements ActionListener{
         
 
 
-
+        char newdirection = ' ';
         if(path[appleY/Unit_Size][appleX/Unit_Size] > path[SnekY][SnekX] && path[SnekY][SnekX] > 0){
-            if(path[appleY/Unit_Size][appleX/Unit_Size] > path[SnekY][SnekX+1] && SnekX+ 1 < Screen_Width/Unit_Size && direction != 'l')
-            direction = 'r';
+            if(path[appleY/Unit_Size][appleX/Unit_Size] > path[SnekY][SnekX+1] && SnekX < Screen_Width/Unit_Size && direction != 'l')
+            newdirection = 'r';
         }
         else if(direction == 'd' && SnekY == 23 && SnekX % 2 == 0){
-            direction = 'r';
+            newdirection = 'r';
         }
         else if(SnekY == 23 && SnekX % 2 ==1 && direction != 'd'){
-            direction = 'u';
+            newdirection = 'u';
             System.out.println(SnekY + "  " + SnekX);
         } 
-        /* */
+        
         else if(path[y[bodyParts-1]/Unit_Size][x[bodyParts-1]/Unit_Size] > path[appleY/Unit_Size][appleX/Unit_Size] && bodyParts < (Game_Untis/Unit_Size)/2 ){
             if(path[SnekY][SnekX] < Game_Untis/Unit_Size - Screen_Width/Unit_Size){
-                if(path[appleY/Unit_Size][appleX/Unit_Size] < path[SnekY][SnekX] && direction !='d') direction = 'u';
+                if(path[appleY/Unit_Size][appleX/Unit_Size] < path[SnekY][SnekX] && direction !='d') newdirection = 'u';
                 //else if(direction == 'd') direction = 'r';
             }
         }
-
+        if( newdirection == 'l' && direction != 'r') direction = newdirection;
+        else if( newdirection == 'r' && direction != 'l') direction = newdirection;
+        else if( newdirection == 'u' && direction != 'd') direction = newdirection;
+        else if( newdirection == 'd' && direction != 'u') direction = newdirection;
+        */
         /*
         if(y[0]/25 == 0) direction = 'l';
         else if(y[0]/25 == 22 && (x[0]/25) % 2 == 0 ){
@@ -222,10 +225,151 @@ public class GamePanel extends JPanel implements ActionListener{
         }
         */
         //System.out.println(path[y[y.length-1]/Unit_Size][x[x.length-1]/Unit_Size]);
+///////////////////////////////////////////////////////////  aq mtavrdeba \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
+
+
+///////////////// aq shevamotmot samive mxare da magis mixedvit mivigot gadawkvetileba mowrat gza tu ara \\\\\\\\\\\\\\\\\\
+/* 
+char newdir = direction;
+int board_size = (Screen_Width/Unit_Size) * (Screen_Height/Unit_Size);
+int head_x = x[0]/Unit_Size + 1;
+int head_y = y[0]/Unit_Size + 1;
+int pre_x = x[1]/Unit_Size + 1;
+int pre_y = y[1]/Unit_Size + 1;
+int tail_x = x[bodyParts-1]/Unit_Size + 1;
+int tail_y = y[bodyParts-1]/Unit_Size + 1;
+int apple_val = path[appleY/Unit_Size +1][appleX/Unit_Size +1];
+int tail_val = path[y[bodyParts-1]/Unit_Size + 1][x[bodyParts-1]/Unit_Size + 1];
+int val_r = path[y[0]/Unit_Size + 1][x[0]/Unit_Size + 2];
+int val_l = path[y[0]/Unit_Size + 1][x[0]/Unit_Size];
+int val_u = path[y[0]/Unit_Size + 2][x[0]/Unit_Size + 1];
+int val_d = path[y[0]/Unit_Size][x[0]/Unit_Size + 1];
+int bestDist = 95063713;
+*/
+/*        
+///////////////////// IO code mara ar gamodis \\\\\\\\\\\\
+if(direction != 'l' && head_x < Screen_Width/Unit_Size){// can go right
+    int dist = (apple_val - val_r + board_size) % board_size;
+    if(dist < bestDist){
+        newdir = 'r';
+        bestDist = dist;
+    }
+}
+if(direction != 'r' && head_y > 1){// can go left
+    int dist = (apple_val - val_l + board_size) % board_size;
+    if(dist < bestDist){
+        newdir = 'l';
+        bestDist = dist;
+    }
+}
+if(direction != 'u' && head_y > 1){// can go down
+    int dist = (apple_val - val_d + board_size) % board_size;
+    if(dist < bestDist){
+        newdir = 'd';
+        bestDist = dist;
+    }
+}
+if(direction != 'd' && head_y < Screen_Height/Unit_Size){// can go up
+    int dist = (apple_val - val_u + board_size) % board_size;
+    if(dist < bestDist){
+        newdir = 'u';
+        bestDist = dist;
+    }
+}
+
+
+System.out.println(newdir + " " + bestDist + " ");
+
+////////////////////////////////// BRUHHHHHHHHHHHHHHHH  \\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+*/
+
+        char newdir = direction;
+        int SnekX = x[0]/Unit_Size + 1;
+        int SnekY = y[0]/Unit_Size + 1;
+        int tail_x = x[bodyParts-1]/Unit_Size + 1;
+        int tail_y = y[bodyParts-1]/Unit_Size + 1;
+        int apple_x = appleX/Unit_Size +1;
+        int apple_y = appleY/Unit_Size +1;
+/* 
+        path[SnekY][SnekX+1] 
+        path[SnekY][SnekX-1] 
+        path[SnekY+1][SnekX] 
+        path[SnekY-1][SnekX]
+*/      if(path[SnekY][SnekX] < path[apple_y][apple_x]){
+            if(direction == 'r'){
+                if(path[SnekY][SnekX+1] > path[SnekY+1][SnekX] && path[SnekY][SnekX+1] > path[SnekY-1][SnekX] && path[SnekY][SnekX+1] <= path[apple_y][apple_x]){
+                    newdir = 'r';
+                }else if(path[SnekY+1][SnekX] > path[SnekY][SnekX+1] && path[SnekY+1][SnekX] > path[SnekY-1][SnekX] && path[SnekY+1][SnekX] <= path[apple_y][apple_x]){
+                    newdir = 'u';
+                }else if(path[SnekY-1][SnekX] > path[SnekY][SnekX+1] && path[SnekY-1][SnekX] > path[SnekY+1][SnekX] && path[SnekY-1][SnekX] <= path[apple_y][apple_x]){
+                    newdir = 'd';
+                }if(path[SnekY][SnekX-1] > path[SnekY+1][SnekX] && path[SnekY][SnekX-1] > path[SnekY-1][SnekX] && path[SnekY][SnekX-1] <= path[apple_y][apple_x]){
+                    newdir = 'l';
+                }else{
+                    newdir = miyeviHamiltons(SnekY, SnekX);
+                }
+
+            }else if(direction == 'l'){
+                if(path[SnekY][SnekX-1] > path[SnekY+1][SnekX] && path[SnekY][SnekX-1] > path[SnekY-1][SnekX] && path[SnekY][SnekX-1] <= path[apple_y][apple_x]){
+                    newdir = 'l';
+                }else if(path[SnekY-1][SnekX] > path[SnekY][SnekX-1] && path[SnekY+1][SnekX] > path[SnekY-1][SnekX] && path[SnekY+1][SnekX] <= path[apple_y][apple_x]){
+                    newdir = 'u';
+                }else if(path[SnekY-1][SnekX] > path[SnekY][SnekX-1] && path[SnekY-1][SnekX] > path[SnekY+1][SnekX] && path[SnekY-1][SnekX] <= path[apple_y][apple_x]){
+                    newdir = 'd';
+                }else{
+                    newdir = miyeviHamiltons(SnekY, SnekX);
+                }
+
+            }else if(direction == 'u'){
+                if(path[SnekY][SnekX+1] > path[SnekY+1][SnekX] && path[SnekY][SnekX+1] > path[SnekY-1][SnekX] && path[SnekY][SnekX+1] <= path[apple_y][apple_x]){
+                    newdir = 'r';
+                }else if(path[SnekY+1][SnekX] > path[SnekY][SnekX+1] && path[SnekY+1][SnekX] > path[SnekY-1][SnekX] && path[SnekY+1][SnekX] <= path[apple_y][apple_x] && path[SnekY+1][SnekX] !=0){
+                    newdir = 'u';
+                    System.out.println("zangis shlangi");
+                }else if(path[SnekY][SnekX-1] > path[SnekY+1][SnekX] && path[SnekY][SnekX-1] > path[SnekY-1][SnekX] && path[SnekY][SnekX-1] <= path[apple_y][apple_x]){
+                    newdir = 'l';
+                }else{
+                    newdir = miyeviHamiltons(SnekY, SnekX);
+                }
+
+            }else if(direction == 'd'){
+                if(path[SnekY][SnekX+1] > path[SnekY+1][SnekX] && path[SnekY][SnekX+1] > path[SnekY-1][SnekX] && path[SnekY][SnekX+1] <= path[apple_y][apple_x]){
+                    newdir = 'r';
+                }else if(path[SnekY-1][SnekX] > path[SnekY][SnekX-1] && path[SnekY-1][SnekX] > path[SnekY+1][SnekX] && path[SnekY-1][SnekX] <= path[apple_y][apple_x]){
+                    newdir = 'd';
+                }else if(path[SnekY][SnekX-1] > path[SnekY+1][SnekX] && path[SnekY][SnekX-1] > path[SnekY-1][SnekX] && path[SnekY][SnekX-1] <= path[apple_y][apple_x]){
+                    newdir = 'l';
+                } else{
+                    newdir = miyeviHamiltons(SnekY, SnekX);
+                }
+            }
+        }else if(path[tail_y][tail_x] > path[apple_y][apple_x]){
+            if(direction != 'd' && SnekY > 1) newdir = 'u';
+            else newdir = miyeviHamiltons(SnekY, SnekX);
+        }else newdir = miyeviHamiltons(SnekY, SnekX);
+
+        direction = newdir;
+        System.out.print(direction + " ");
         move();
     }
-    
+    public char miyeviHamiltons(int SnekY, int SnekX){
+        if (path[SnekY][SnekX] + 1 == path[SnekY - 1][SnekX] && direction != 'd'){
+            return 'u';
+        }
+        else if (path[SnekY][SnekX] + 1 == path[SnekY + 1][SnekX] && direction != 'u'){
+            return 'd';
+        }
+        else if (path[SnekY][SnekX] + 1 == path[SnekY][SnekX + 1] && direction != 'l'){
+            return 'r';
+        }
+        else if (path[SnekY][SnekX] + 1 == path[SnekY][SnekX - 1] && direction !='r'){
+            return 'l';
+        }else if(path[SnekY][SnekX] == Screen_Width/Unit_Size * Screen_Height/Unit_Size -1 && direction !='u') return 'd';
+        else return 'F'; // F for Fucked
+    }
+
+
     public void checkApples(){
         if(x[0] == appleX && y[0] == appleY){
             bodyParts++;
