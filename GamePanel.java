@@ -206,14 +206,14 @@ public class GamePanel extends JPanel implements ActionListener{
             direction = 'u';
             System.out.println(SnekY + "  " + SnekX);
         } 
-        /*
+        /* */
         else if(path[y[bodyParts-1]/Unit_Size][x[bodyParts-1]/Unit_Size] > path[appleY/Unit_Size][appleX/Unit_Size] && bodyParts < (Game_Untis/Unit_Size)/2 ){
             if(path[SnekY][SnekX] < Game_Untis/Unit_Size - Screen_Width/Unit_Size){
                 if(path[appleY/Unit_Size][appleX/Unit_Size] < path[SnekY][SnekX] && direction !='d') direction = 'u';
                 //else if(direction == 'd') direction = 'r';
             }
         }
-*/
+
         /*
         if(y[0]/25 == 0) direction = 'l';
         else if(y[0]/25 == 22 && (x[0]/25) % 2 == 0 ){
