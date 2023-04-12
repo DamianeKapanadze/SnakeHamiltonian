@@ -9,7 +9,7 @@ public class GamePanel extends JPanel implements ActionListener{
     static final int Screen_Height = 600;
     static final int Unit_Size = 25;
     static final int Game_Untis = Screen_Width*Screen_Height/Unit_Size;
-    static final int Delay = 5;
+    static final int Delay = 1;
     final int x[] = new int[Game_Untis];
     final int y[] = new int[Game_Untis];
     int[][]  path = hamiltonianCycle(Screen_Width/Unit_Size, Screen_Height/Unit_Size);
@@ -231,55 +231,55 @@ public class GamePanel extends JPanel implements ActionListener{
 
 ///////////////// aq shevamotmot samive mxare da magis mixedvit mivigot gadawkvetileba mowrat gza tu ara \\\\\\\\\\\\\\\\\\
 /* 
-char newdir = direction;
-int board_size = (Screen_Width/Unit_Size) * (Screen_Height/Unit_Size);
-int head_x = x[0]/Unit_Size + 1;
-int head_y = y[0]/Unit_Size + 1;
-int pre_x = x[1]/Unit_Size + 1;
-int pre_y = y[1]/Unit_Size + 1;
-int tail_x = x[bodyParts-1]/Unit_Size + 1;
-int tail_y = y[bodyParts-1]/Unit_Size + 1;
-int apple_val = path[appleY/Unit_Size +1][appleX/Unit_Size +1];
-int tail_val = path[y[bodyParts-1]/Unit_Size + 1][x[bodyParts-1]/Unit_Size + 1];
-int val_r = path[y[0]/Unit_Size + 1][x[0]/Unit_Size + 2];
-int val_l = path[y[0]/Unit_Size + 1][x[0]/Unit_Size];
-int val_u = path[y[0]/Unit_Size + 2][x[0]/Unit_Size + 1];
-int val_d = path[y[0]/Unit_Size][x[0]/Unit_Size + 1];
-int bestDist = 95063713;
-*/
-/*        
-///////////////////// IO code mara ar gamodis \\\\\\\\\\\\
-if(direction != 'l' && head_x < Screen_Width/Unit_Size){// can go right
-    int dist = (apple_val - val_r + board_size) % board_size;
-    if(dist < bestDist){
-        newdir = 'r';
-        bestDist = dist;
+    char newdir = direction;
+    int board_size = (Screen_Width/Unit_Size) * (Screen_Height/Unit_Size);
+    int head_x = x[0]/Unit_Size + 1;
+    int head_y = y[0]/Unit_Size + 1;
+    int pre_x = x[1]/Unit_Size + 1;
+    int pre_y = y[1]/Unit_Size + 1;
+    int tail_x = x[bodyParts-1]/Unit_Size + 1;
+    int tail_y = y[bodyParts-1]/Unit_Size + 1;
+    int apple_val = path[appleY/Unit_Size +1][appleX/Unit_Size +1];
+    int tail_val = path[y[bodyParts-1]/Unit_Size + 1][x[bodyParts-1]/Unit_Size + 1];
+    int val_r = path[y[0]/Unit_Size + 1][x[0]/Unit_Size + 2];
+    int val_l = path[y[0]/Unit_Size + 1][x[0]/Unit_Size];
+    int val_u = path[y[0]/Unit_Size + 2][x[0]/Unit_Size + 1];
+    int val_d = path[y[0]/Unit_Size][x[0]/Unit_Size + 1];
+    int bestDist = 95063713;
+    */
+    /*        
+    ///////////////////// IO code mara ar gamodis \\\\\\\\\\\\
+    if(direction != 'l' && head_x < Screen_Width/Unit_Size){// can go right
+        int dist = (apple_val - val_r + board_size) % board_size;
+        if(dist < bestDist){
+            newdir = 'r';
+            bestDist = dist;
+        }
     }
-}
-if(direction != 'r' && head_y > 1){// can go left
-    int dist = (apple_val - val_l + board_size) % board_size;
-    if(dist < bestDist){
-        newdir = 'l';
-        bestDist = dist;
+    if(direction != 'r' && head_y > 1){// can go left
+        int dist = (apple_val - val_l + board_size) % board_size;
+        if(dist < bestDist){
+            newdir = 'l';
+            bestDist = dist;
+        }
     }
-}
-if(direction != 'u' && head_y > 1){// can go down
-    int dist = (apple_val - val_d + board_size) % board_size;
-    if(dist < bestDist){
-        newdir = 'd';
-        bestDist = dist;
+    if(direction != 'u' && head_y > 1){// can go down
+        int dist = (apple_val - val_d + board_size) % board_size;
+        if(dist < bestDist){
+            newdir = 'd';
+            bestDist = dist;
+        }
     }
-}
-if(direction != 'd' && head_y < Screen_Height/Unit_Size){// can go up
-    int dist = (apple_val - val_u + board_size) % board_size;
-    if(dist < bestDist){
-        newdir = 'u';
-        bestDist = dist;
-    }
-}
+    if(direction != 'd' && head_y < Screen_Height/Unit_Size){// can go up
+        int dist = (apple_val - val_u + board_size) % board_size;
+        if(dist < bestDist){
+            newdir = 'u';
+            bestDist = dist;
+        }
+    }   
 
 
-System.out.println(newdir + " " + bestDist + " ");
+    System.out.println(newdir + " " + bestDist + " ");
 
 ////////////////////////////////// BRUHHHHHHHHHHHHHHHH  \\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 */
@@ -291,12 +291,15 @@ System.out.println(newdir + " " + bestDist + " ");
         int tail_y = y[bodyParts-1]/Unit_Size + 1;
         int apple_x = appleX/Unit_Size +1;
         int apple_y = appleY/Unit_Size +1;
+        int board_size = (Screen_Width/Unit_Size) * (Screen_Height/Unit_Size);
+        int tail_val = path[y[bodyParts-1]/Unit_Size + 1][x[bodyParts-1]/Unit_Size + 1];
 /* 
         path[SnekY][SnekX+1] 
         path[SnekY][SnekX-1] 
         path[SnekY+1][SnekX] 
         path[SnekY-1][SnekX]
-*/      if(path[SnekY][SnekX] < path[apple_y][apple_x]){
+*/      if(x[0]/25 == 23 && y[0]/25 == 0) newdir = 'l';
+        else if(path[SnekY][SnekX] < path[apple_y][apple_x]){
             if(direction == 'r'){
                 if(path[SnekY][SnekX+1] > path[SnekY+1][SnekX] && path[SnekY][SnekX+1] > path[SnekY-1][SnekX] && path[SnekY][SnekX+1] <= path[apple_y][apple_x]){
                     newdir = 'r';
@@ -304,7 +307,7 @@ System.out.println(newdir + " " + bestDist + " ");
                     newdir = 'u';
                 }else if(path[SnekY-1][SnekX] > path[SnekY][SnekX+1] && path[SnekY-1][SnekX] > path[SnekY+1][SnekX] && path[SnekY-1][SnekX] <= path[apple_y][apple_x]){
                     newdir = 'd';
-                }if(path[SnekY][SnekX-1] > path[SnekY+1][SnekX] && path[SnekY][SnekX-1] > path[SnekY-1][SnekX] && path[SnekY][SnekX-1] <= path[apple_y][apple_x]){
+                }if(path[SnekY][SnekX-1] > path[SnekY+1][SnekX] && path[SnekY][SnekX-1] > path[SnekY-1][SnekX] && path[SnekY][SnekX-1] <= path[apple_y][apple_x] ){
                     newdir = 'l';
                 }else{
                     newdir = miyeviHamiltons(SnekY, SnekX);
@@ -344,15 +347,40 @@ System.out.println(newdir + " " + bestDist + " ");
                     newdir = miyeviHamiltons(SnekY, SnekX);
                 }
             }
+            if(checkNextMove(newdir, SnekY, SnekX, tail_x, tail_y)){
+                newdir = miyeviHamiltons(SnekY, SnekX);
+            }
         }else if(path[tail_y][tail_x] > path[apple_y][apple_x]){
             if(direction != 'd' && SnekY > 1) newdir = 'u';
             else newdir = miyeviHamiltons(SnekY, SnekX);
         }else newdir = miyeviHamiltons(SnekY, SnekX);
 
+        //if((path[SnekY][SnekX] - tail_val + board_size ) % board_size > bodyParts + 10) direction = miyeviHamiltons(SnekY, SnekX);
         direction = newdir;
-        System.out.print(direction + " ");
+        //System.out.print(direction + " ");
         move();
     }
+
+    public boolean checkNextMove(char dir, int SnekY, int SnekX, int tail_x, int tail_y){
+        if(dir == 'r'){
+            if(path[SnekY][SnekX+1] > path[tail_y][tail_x]) return false;
+            else return true;
+        }else if(dir == 'u'){
+            if(path[SnekY+1][SnekX] > path[tail_y][tail_x]) return false;
+            else return true;
+        }else if(dir == 'l'){
+            if(path[SnekY][SnekX-1] > path[tail_y][tail_x]) return false;
+            else return true;
+        }else if(dir == 'd'){
+            if(path[SnekY-1][SnekX] > path[tail_y][tail_x]) return false;
+            else return true;
+        }
+
+        return false;
+    }
+
+
+
     public char miyeviHamiltons(int SnekY, int SnekX){
         if (path[SnekY][SnekX] + 1 == path[SnekY - 1][SnekX] && direction != 'd'){
             return 'u';
@@ -415,6 +443,8 @@ System.out.println(newdir + " " + bestDist + " ");
         System.out.println(x[1]/25 + " " + y[1]/25);
         System.out.println(x[0]/25 + " " + y[0]/25);
         System.out.println(direction);
+        System.out.println(applesEaten);
+        
         
         
     }
